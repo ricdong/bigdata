@@ -45,7 +45,6 @@ object DFTruesight extends Logging  {
         val peopleDF = sqlContext.createDataFrame(rdd, schema) 
    
         peopleDF.show()
-        
         peopleDF.foreach { x => println(x.get(0)) } 
         
         info("total count " + peopleDF.count().toInt)
