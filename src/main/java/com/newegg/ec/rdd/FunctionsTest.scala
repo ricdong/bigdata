@@ -39,6 +39,7 @@ object FunctionsTest {
       {
         a % 2
       }
+    
     a.groupBy(x => myfunc(x), 3).foreach(println)
   }
 }
