@@ -24,6 +24,6 @@ object GCInfoParser {
       (3.58, CMS: abort preclean due to time 2015-04-01T21:07:36.738-0700: 13244256.810: [CMS-concurrent-abortable-preclean: 3.244/5.148 secs] [Times: user=3.58 sys=0.11, real=5.15 secs] )
       ... 
      */
-    data.map{ x => (x.split("=")(1).split(" ")(0) , x)}.sortByKey(false).top(100).foreach(println) 
+    data.map{ x => (x.split("=")(1).split(" ")(0) , x)}.sortByKey(false).top(10).foreach(println) 
   }
 }
