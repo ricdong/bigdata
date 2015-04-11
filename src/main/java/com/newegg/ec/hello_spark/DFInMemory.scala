@@ -39,5 +39,9 @@ object DFInMemory {
    val peopleDF = sqlContext.createDataFrame(rdd, schema) 
    
    peopleDF.show()
+   
+   peopleDF.groupBy("birthday").count().show()
+   
+   
  }
 }
