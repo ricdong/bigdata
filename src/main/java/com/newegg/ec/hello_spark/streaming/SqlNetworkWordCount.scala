@@ -16,7 +16,7 @@ import org.apache.log4j.Level
  */
 object SqlNetworkWordCount {
   def main(args: Array[String]) {
-    val args = Array("localhost", "9999")
+    val args = Array("192.168.1.4", "9999")
     if (args.length < 2) {
       System.err.println("Usage: NetworkWordCount <hostname> <port>")
       System.exit(1)
