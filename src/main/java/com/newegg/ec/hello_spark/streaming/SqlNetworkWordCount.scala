@@ -16,7 +16,7 @@ import org.apache.log4j.Level
  */
 object SqlNetworkWordCount {
   def main(args: Array[String]) {
-    val args = Array("192.168.1.4", "9999")
+    // val args = Array("192.168.1.4", "9999")
     if (args.length < 2) {
       System.err.println("Usage: NetworkWordCount <hostname> <port>")
       System.exit(1)
@@ -34,7 +34,7 @@ object SqlNetworkWordCount {
     // Note that no duplication in storage level only for running locally.
     // Replication necessary in distributed scenario for fault tolerance.
     val lines = ssc.socketTextStream(args(0), args(1).toInt, StorageLevel.MEMORY_AND_DISK_SER)
-    val words = lines.flatMap(_.split(" "))
+    val words = lines.flatMap(_.split(" ")).window(Seconds(30), Seconds(4))
 
     // Convert RDDs of the words DStream to DataFrame and run SQL query
     words.foreachRDD((rdd: RDD[String], time: Time) => {
