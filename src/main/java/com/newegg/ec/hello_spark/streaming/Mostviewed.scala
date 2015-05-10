@@ -54,7 +54,7 @@ object Mostviewed {
       // Do word count on table using SQL and print it
       val wordCountsDataFrame =
         sqlContext.sql("select city, count(city) as t from requestfromwhere group by city order by t desc limit 10")
-      // println(s"========= $time =========")
+      println(s"========= $time =========")
       wordCountsDataFrame.show()
     })
 
