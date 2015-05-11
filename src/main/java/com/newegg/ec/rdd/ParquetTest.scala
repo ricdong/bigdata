@@ -17,7 +17,7 @@ object ParquetTest {
     val conf = new SparkConf().setAppName("Parquet Test").setMaster("local[2]")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
-//    import sqlContext._
+    import sqlContext._
 //    import sqlContext.createSchemaRDD
 
     val rdd = sc.textFile("/Users/ricdong/Downloads/page.txt", 2)
