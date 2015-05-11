@@ -1,0 +1,4 @@
+Set a ZooKeeper timeout to 30s instead of the old 180s default.
+tail the log to find the tag of ‘TooSlow’
+disable the balancer
+zookeeper.session.timeout
