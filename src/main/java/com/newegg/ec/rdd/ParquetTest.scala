@@ -23,7 +23,7 @@ object ParquetTest {
     val rdd = sc.textFile("/Users/ricdong/Downloads/page.txt", 2)
 
     val rdds : RDD[request] = rdd.map(_.split("\001")).map(x => request(x(0), x(1)))
-    // rdd.collect().foreach(println(_))
+    rdd.collect().foreach(println(_))
 
 //    rdds.saveAsParquetFile("")
 
