@@ -6,16 +6,16 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
-import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gautam on 5/27/14.
+ * Created by ricdong on 15-8-4.
  */
-public class ORCMapper extends Mapper<LongWritable,Text,NullWritable,Text> {
+public class ORCReducer extends Reducer<NullWritable,Text,NullWritable,Writable> {
 
     private final OrcSerde serde = new OrcSerde();
 
@@ -29,17 +29,19 @@ public class ORCMapper extends Mapper<LongWritable,Text,NullWritable,Text> {
     private final ObjectInspector oip = TypeInfoUtils
             .getStandardJavaObjectInspectorFromTypeInfo(typeInfo);
 
-    //private final NCDCParser parser = new NCDCParser();
+    public void reduce(NullWritable key, Iterable<Text> values,
+                       Context context) throws IOException, InterruptedException {
 
+        for(Text t : values) {
+            System.out.println("value " + t);
+        }
 
-    @Override
-    protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        List<Object> struct = new ArrayList<Object>(2);
+        struct.add(0, "001");
+        struct.add(1, "ricdong");
+        Writable row = serde.serialize(struct, oip);
 
-//        List<Object> struct = new ArrayList<Object>(2);
-//        struct.add(0, "001");
-//        struct.add(1, "ricdong");
-//        Writable row = serde.serialize(struct, oip);
-        context.write(NullWritable.get(), new Text("one"));
-
+        System.out.println("vlaue " + values);
+        context.write(NullWritable.get(), row);
     }
 }

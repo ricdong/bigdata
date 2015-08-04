@@ -3,6 +3,7 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hive.ql.io.orc.OrcNewOutputFormat;
 import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -23,7 +24,7 @@ public class RunORC extends Configured implements Tool {
     }
 
     public int run(String[] arg) throws Exception {
-        arg = new String[] {"resource/input", "resource/output", "0"};
+        arg = new String[] {"resource/input", "resource/output", "1"};
 
         Configuration conf=getConf();
 
@@ -35,13 +36,16 @@ public class RunORC extends Configured implements Tool {
         job.setJarByClass(RunORC.class);
         job.setJobName("ORC Output");
         job.setMapOutputKeyClass(NullWritable.class);
-        job.setMapOutputValueClass(OrcNewOutputFormat.class);
-
+        // job.setMapOutputValueClass(OrcNewOutputFormat.class);
+        job.setMapOutputValueClass(Text.class);
 
         job.setMapperClass(ORCMapper.class);
 
         job.setNumReduceTasks(Integer.parseInt(arg[2]));
+
         job.setOutputFormatClass(OrcNewOutputFormat.class);
+
+        job.setReducerClass(ORCReducer.class);
 
 
         FileInputFormat.addInputPath(job, new Path(arg[0]));
