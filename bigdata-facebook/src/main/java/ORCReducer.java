@@ -14,6 +14,9 @@ import java.util.List;
 
 /**
  * Created by ricdong on 15-8-4.
+ * usage: http://zh.hortonworks.com/blog/orcfile-in-hdp-2-better-compression-better-performance/
+ *
+ *
  */
 public class ORCReducer extends Reducer<NullWritable,Text,NullWritable,Writable> {
 

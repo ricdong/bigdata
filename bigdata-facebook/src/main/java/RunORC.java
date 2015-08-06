@@ -30,6 +30,8 @@ public class RunORC extends Configured implements Tool {
 
         //Set ORC configuration parameters
         conf.set("orc.create.index", "true");
+        conf.set("orc.compress", "SNAPPY"); // NONE, ZLIB, SNAPPY
+        conf.set("orc.compress.size", "262144"); // Number of bytes in each compression chunk
 
 
         Job job = Job.getInstance(conf);
